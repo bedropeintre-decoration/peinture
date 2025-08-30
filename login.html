@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Badro Peintre</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #006633, #00cc66);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+        }
+        
+        .logo {
+            margin-bottom: 20px;
+        }
+        
+        .algeria-flag {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .flag-inner {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 33%, #d21034 33%, #d21034 66%, #006233 66%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flag-inner::after {
+            content: "✓";
+            color: #d21034;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        h2 {
+            color: #006633;
+            margin-bottom: 25px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        input {
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #006633;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #00cc66;
+        }
+        
+        .error {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <div class="algeria-flag">
+                <div class="flag-inner"></div>
+            </div>
+            <h2>تسجيل الدخول إلى لوحة التحكم</h2>
+        </div>
+        
+        <form id="login-form">
+            <input type="text" id="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <button type="submit">دخول</button>
+        </form>
+        
+        <div class="error" id="error-message">اسم المستخدم أو كلمة المرور غير صحيحة</div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // بيانات الدخول (يمكن تغييرها)
+            const correctUsername = 'admin';
+            const correctPassword = 'badro123';
+            
+            if (username === correctUsername && password === correctPassword) {
+                // حفظ حالة تسجيل الدخول
+                localStorage.setItem('isLoggedIn', 'true');
+                // الانتقال إلى لوحة التحكم
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
