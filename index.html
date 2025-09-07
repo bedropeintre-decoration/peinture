@@ -319,16 +319,17 @@
         </div>
     </section>
     
-    <!-- قسم الاتصال -->
+   <!-- قسم الاتصال -->
 <section id="contact">
     <h2>اتصل بنا</h2>
     <form id="contact-form">
-        <input type="text" id="contact-name" placeholder="badro.peintre" required>
-        <input type="email" id="contact-email" placeholder="bedro.peintre@gmail.com" required>
-        <input type="tel" id="contact-phone" placeholder="0796053879">
+        <input type="text" id="contact-name" placeholder="اسمك الكامل" required>
+        <input type="email" id="contact-email" placeholder="بريدك الإلكتروني" required>
+        <input type="tel" id="contact-phone" placeholder="هاتفك">
         <textarea id="contact-message" placeholder="رسالتك" rows="5" required></textarea>
         <button type="submit">إرسال الرسالة</button>
     </form>
+    <div id="form-result" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px;"></div>
 </section>
     
     <!-- لوحة التحكم للمسؤول (مخفية بشكل افتراضي) -->
@@ -452,29 +453,50 @@
             }
         }
 
-        // معالجة إرسال نموذج الاتصال
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('شكراً على رسالتك! سنتواصل معك قريباً.');
-            this.reset();
-        });
-
-        // تهيئة الصفحة عند التحميل
-        window.onload = function() {
-            displayTestimonials();
-            displayGallery();
-            displayOffers();
-            
-            // إضافة رابط سري للوصول إلى لوحة التحكم (لأغراض التطوير)
-            const footer = document.querySelector('footer');
-            const adminLink = document.createElement('a');
-            adminLink.href = '#';
-            adminLink.onclick = showAdminPanel;
-            adminLink.style.color = '#ccc';
-            adminLink.style.fontSize = '12px';
-            adminLink.textContent = 'لوحة التحكم';
-            footer.appendChild(adminLink);
-        };
+      // معالجة إرسال نموذج الاتصال
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // جمع بيانات النموذج
+    const contactData = {
+        id: Date.now(), // استخدام الطوابع الزمنية كمعرف فريد
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        phone: document.getElementById('contact-phone').value,
+        message: document.getElementById('contact-message').value,
+        date: new Date().toISOString(),
+        read: false // لتحديد إذا كانت الرسالة مقروءة أم لا
+    };
+    
+    // الحصول على الرسائل الحالية من localStorage
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    
+    // إضافة الرسالة الجديدة
+    messages.push(contactData);
+    
+    // حفظ الرسائل في localStorage
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    
+    // إظهار رسالة النجاح
+    const resultDiv = document.getElementById('form-result');
+    resultDiv.style.display = 'block';
+    resultDiv.style.backgroundColor = '#d4edda';
+    resultDiv.style.color = '#155724';
+    resultDiv.style.border = '1px solid #c3e6cb';
+    resultDiv.innerHTML = 'شكراً على رسالتك! سنتواصل معك قريباً.';
+    
+    // إخفاء الرسالة بعد 5 ثوان
+    setTimeout(() => {
+        resultDiv.style.display = 'none';
+    }, 5000);
+    
+    // إعادة تعيين النموذج
+    this.reset();
+    
+    // للتأكد من حفظ البيانات، يمكنك عرضها في console
+    console.log('تم حفظ الرسالة:', contactData);
+    console.log('جميع الرسائل:', messages);
+});
         <script>
     // معالجة إرسال نموذج الاتصال
     document.getElementById('contact-form').addEventListener('submit', function(e) {
