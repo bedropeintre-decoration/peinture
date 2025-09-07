@@ -463,7 +463,7 @@
                 </table>
             </div>
             
-         <!-- قسم رسائل الاتصال -->
+       <!-- قسم رسائل الاتصال -->
 <div class="section" id="contact">
     <h2>رسائل الاتصال</h2>
     
@@ -929,3 +929,144 @@
     </script>
 </body>
 </html>
+// دالة لعرض رسائل الاتصال
+function displayMessages(filter = 'all') {
+    const container = document.getElementById('messages-container');
+    container.innerHTML = '';
+    
+    // الحصول على الرسائل من localStorage
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    
+    // ترتيب الرسائل من الأحدث إلى الأقدم
+    messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // تطبيق الفلتر إذا كان موجودًا
+    if (filter === 'unread') {
+        messages = messages.filter(m => !m.read);
+    } else if (filter === 'read') {
+        messages = messages.filter(m => m.read);
+    }
+    
+    // عرض عداد الرسائل
+    const totalMessages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    const unreadCount = totalMessages.filter(m => !m.read).length;
+    const counter = document.createElement('div');
+    counter.className = 'message-counter';
+    counter.innerHTML = `إجمالي الرسائل: ${totalMessages.length} | غير المقروءة: ${unreadCount}`;
+    container.appendChild(counter);
+    
+    if (messages.length === 0) {
+        container.innerHTML += '<p class="no-messages">لا توجد رسائل</p>';
+        return;
+    }
+    
+    messages.forEach(message => {
+        const messageEl = document.createElement('div');
+        messageEl.className = `message-item ${message.read ? '' : 'unread'}`;
+        messageEl.innerHTML = `
+            <div class="message-header">
+                <div class="message-sender">${message.name} - ${message.email}</div>
+                <div class="message-date">${new Date(message.date).toLocaleString('ar-EG')}</div>
+            </div>
+            <div class="message-contact">
+                <strong>الهاتف:</strong> ${message.phone || 'غير متوفر'}
+            </div>
+            <div class="message-content">
+                <strong>الرسالة:</strong><br>${message.message}
+            </div>
+            <div class="message-actions">
+                ${!message.read ? `<button class="btn mark-read-btn" data-id="${message.id}">تم القراءة</button>` : ''}
+                <button class="btn btn-delete delete-message-btn" data-id="${message.id}">حذف</button>
+            </div>
+        `;
+        container.appendChild(messageEl);
+    });
+    
+    // إضافة مستمعي الأحداث للأزرار
+    document.querySelectorAll('.mark-read-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            markMessageAsRead(id);
+        });
+    });
+    
+    document.querySelectorAll('.delete-message-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            deleteMessage(id);
+        });
+    });
+}
+
+// دالة لتحديد الرسالة كمقروءة
+function markMessageAsRead(id) {
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    messages = messages.map(message => {
+        if (message.id == id) {
+            message.read = true;
+        }
+        return message;
+    });
+    
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    displayMessages();
+    updateDashboardStats();
+}
+
+// دالة لحذف الرسالة
+function deleteMessage(id) {
+    if (confirm('هل أنت متأكد من أنك تريد حذف هذه الرسالة؟')) {
+        let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+        messages = messages.filter(message => message.id != id);
+        
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+        displayMessages();
+        updateDashboardStats();
+        
+        alert('تم حذف الرسالة بنجاح!');
+    }
+}
+
+// دالة لحذف جميع الرسائل
+function deleteAllMessages() {
+    if (confirm('هل أنت متأكد من أنك تريد حذف جميع الرسائل؟ لا يمكن التراجع عن هذا الإجراء.')) {
+        localStorage.removeItem('contactMessages');
+        displayMessages();
+        updateDashboardStats();
+        
+        alert('تم حذف جميع الرسائل بنجاح!');
+    }
+}
+
+// تحديث إحصائيات لوحة التحكم لتعكس عدد الرسائل
+function updateDashboardStats() {
+    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    const unreadCount = messages.filter(m => !m.read).length;
+    
+    document.getElementById('messages-count').textContent = unreadCount;
+}
+
+// في نهاية دالة window.onload، أضف:
+// إعداد الفلاتر
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        displayMessages(this.getAttribute('data-filter'));
+    });
+});
+
+// إعداد زر حذف الكل
+document.getElementById('delete-all-btn').addEventListener('click', deleteAllMessages);
+
+// عرض الرسائل عند الدخول إلى قسم الرسائل
+const contactSection = document.getElementById('contact');
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.target.style.display === 'block') {
+            displayMessages();
+        }
+    });
+});
+
+observer.observe(contactSection, { attributes: true, attributeFilter: ['style'] });
