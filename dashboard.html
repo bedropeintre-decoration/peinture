@@ -775,7 +775,7 @@
                 row.innerHTML = `
                     <td>${offer.title}</td>
                     <td>${offer.description}</td>
-                    <td>${offer.status === 'active' ? 'نشط' : 'غير نشط'}</td>
+                    <td>${offer.status === 'active' => 'نشط' : 'غير نشط'}</td>
                     <td>
                         <button class="btn btn-edit" data-id="${offer.id}">تعديل</button>
                         <button class="btn btn-delete" data-id="${offer.id}">حذف</button>
@@ -972,4 +972,9 @@
                 displayMessages();
                 updateDashboardStats();
                 
-                alert('تم حذف جميع الرسائل بنجاح!
+                alert('تم حذف جميع الرسائل بنجاح!');
+            }
+        }
+    </script>
+</body>
+</html>
