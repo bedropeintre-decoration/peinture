@@ -486,7 +486,7 @@
                 id: Date.now(), // استخدام الطوابع الزمنية كمعرف فريد
                 name: document.getElementById('contact-name').value,
                 email: document.getElementById('contact-email').value,
-                phone: document.getElementById('contact-phone').value,
+                phone: document.getElementById('contact-phone').value || 'غير متوفر',
                 message: document.getElementById('contact-message').value,
                 date: new Date().toISOString(),
                 read: false // لتحديد إذا كانت الرسالة مقروءة أم لا
