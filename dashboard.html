@@ -204,6 +204,109 @@
             color: #00cc66;
         }
     </style>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Badro Peintre</title>
+    <style>
+        /* أنماط التصميم العامة */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(to right, #006633, #00cc66);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        ... (أنماط أخرى موجودة) ...
+        
+        /* أنماط رسائل الاتصال - ابدأ بإضافة从这里 */
+        .message-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .message-item.unread {
+            background-color: #f0f9ff;
+            border-left: 4px solid #006633;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message-sender {
+            font-weight: bold;
+            color: #006633;
+        }
+        
+        .message-date {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .message-content {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .message-contact {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn.active {
+            background-color: #004d26;
+        }
+        
+        .no-messages {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .message-counter {
+            margin: 10px 0;
+            color: #006633;
+            font-weight: bold;
+        }
+        /* أنماط رسائل الاتصال - انتهاء */
+        
+    </style>
+</head>
 </head>
 <body>
     <header>
@@ -360,28 +463,21 @@
                 </table>
             </div>
             
-            <!-- قسم رسائل الاتصال -->
-            <div class="section" id="contact">
-                <h2>رسائل الاتصال</h2>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>الاسم</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>الهاتف</th>
-                            <th>الرسالة</th>
-                            <th>التاريخ</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="messages-table">
-                        <!-- سيتم ملء هذا الجدول عبر JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+         <!-- قسم رسائل الاتصال -->
+<div class="section" id="contact">
+    <h2>رسائل الاتصال</h2>
+    
+    <div class="filters">
+        <button class="btn filter-btn active" data-filter="all">الكل</button>
+        <button class="btn filter-btn" data-filter="unread">غير المقروءة</button>
+        <button class="btn filter-btn" data-filter="read">المقروءة</button>
+        <button class="btn btn-delete" id="delete-all-btn">حذف الكل</button>
     </div>
+    
+    <div id="messages-container">
+        <!-- سيتم عرض الرسائل هنا عبر JavaScript -->
+    </div>
+</div>
 
     <script>
         // التحقق من حالة تسجيل الدخول
