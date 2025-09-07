@@ -186,13 +186,45 @@
             color: #006633;
             font-weight: bold;
         }
+
+        .manual-message {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .manual-message h3 {
+            margin-top: 0;
+            color: #006633;
+        }
+        
+        .manual-message textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .manual-message button {
+            background-color: #006633;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo-container">
             <div class="algeria-flag">
-                <div class="flag-inner"></div>
+                <div class 'flag-inner'></div>
             </div>
             <h1>لوحة تحكم Badro Peintre</h1>
         </div>
@@ -234,7 +266,7 @@
                     </div>
                     <div class="card">
                         <h3>رسائل العملاء</h3>
-                        <p class="number">0</p>
+                        <p class="number" id="messages-count">0</p>
                         <p>رسالة جديدة</p>
                     </div>
                 </div>
@@ -265,7 +297,16 @@
             <div class="section" id="messages">
                 <h2>رسائل العملاء</h2>
                 <p>هنا يمكنك عرض رسائل العملاء التي تصل عبر نموذج الاتصال.</p>
-                <p class="no-messages">لا توجد رسائل حالياً. سيتم عرض الرسائل هنا عندما يرسل العملاء رسائل عبر الموقع.</p>
+                
+                <div class="manual-message">
+                    <h3>إضافة رسالة يدوياً (للتجربة)</h3>
+                    <textarea id="manual-message-content" placeholder="اكتب محتوى الرسالة هنا..."></textarea>
+                    <button id="add-manual-message">إضافة رسالة تجريبية</button>
+                </div>
+                
+                <div id="messages-container">
+                    <p class="no-messages">لا توجد رسائل حالياً. سيتم عرض الرسائل هنا عندما يرسل العملاء رسائل عبر الموقع.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -275,6 +316,9 @@
         if (sessionStorage.getItem('isLoggedIn') !== 'true') {
             window.location.href = 'login.html';
         }
+        
+        // بيانات الرسائل (سيتم تخزينها في sessionStorage)
+        let messages = JSON.parse(sessionStorage.getItem('messages')) || [];
         
         // عناصر القائمة الجانبية
         const menuItems = document.querySelectorAll('.sidebar li');
@@ -291,6 +335,11 @@
                 // إضافة النشاط للعنصر المحدد
                 this.classList.add('active');
                 document.getElementById(sectionId).classList.add('active');
+                
+                // إذا كان قسم الرسائل، فعرض الرسائل
+                if (sectionId === 'messages') {
+                    displayMessages();
+                }
             });
         });
         
@@ -299,6 +348,85 @@
             sessionStorage.removeItem('isLoggedIn');
             window.location.href = 'login.html';
         });
+        
+        // إضافة رسالة يدوياً (للتجربة)
+        document.getElementById('add-manual-message').addEventListener('click', function() {
+            const messageContent = document.getElementById('manual-message-content').value;
+            
+            if (messageContent) {
+                const newMessage = {
+                    id: Date.now(),
+                    name: "عميل تجريبي",
+                    email: "test@example.com",
+                    phone: "0000000000",
+                    message: messageContent,
+                    date: new Date().toISOString(),
+                    read: false
+                };
+                
+                messages.push(newMessage);
+                sessionStorage.setItem('messages', JSON.stringify(messages));
+                
+                document.getElementById('manual-message-content').value = '';
+                displayMessages();
+                updateDashboardStats();
+                
+                alert('تم إضافة الرسالة التجريبية بنجاح!');
+            } else {
+                alert('يرجى كتابة محتوى الرسالة أولاً');
+            }
+        });
+        
+        // عرض الرسائل
+        function displayMessages() {
+            const container = document.getElementById('messages-container');
+            container.innerHTML = '';
+            
+            if (messages.length === 0) {
+                container.innerHTML = '<p class="no-messages">لا توجد رسائل حالياً. سيتم عرض الرسائل هنا عندما يرسل العملاء رسائل عبر الموقع.</p>';
+                return;
+            }
+            
+            // ترتيب الرسائل من الأحدث إلى الأقدم
+            messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // عرض عداد الرسائل
+            const unreadCount = messages.filter(m => !m.read).length;
+            const counter = document.createElement('div');
+            counter.className = 'message-counter';
+            counter.innerHTML = `إجمالي الرسائل: ${messages.length} | غير المقروءة: ${unreadCount}`;
+            container.appendChild(counter);
+            
+            messages.forEach(message => {
+                const messageEl = document.createElement('div');
+                messageEl.className = 'message-item';
+                messageEl.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-sender">${message.name} - ${message.email}</div>
+                        <div class="message-date">${new Date(message.date).toLocaleString('ar-EG')}</div>
+                    </div>
+                    <div class="message-contact">
+                        <strong>الهاتف:</strong> ${message.phone || 'غير متوفر'}
+                    </div>
+                    <div class="message-content">
+                        <strong>الرسالة:</strong><br>${message.message}
+                    </div>
+                `;
+                container.appendChild(messageEl);
+            });
+        }
+        
+        // تحديث إحصائيات لوحة التحكم
+        function updateDashboardStats() {
+            const unreadCount = messages.filter(m => !m.read).length;
+            document.getElementById('messages-count').textContent = unreadCount;
+        }
+        
+        // تهيئة الصفحة عند التحميل
+        window.onload = function() {
+            updateDashboardStats();
+            displayMessages();
+        };
     </script>
 </body>
 </html>
