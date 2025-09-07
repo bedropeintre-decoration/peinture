@@ -14,141 +14,431 @@
             color: #333;
         }
         
-        /* ... الأنماط الأخرى تبقى كما هي ... */
+        header {
+            background: linear-gradient(to right, #006633, #00cc66);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
         
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .algeria-flag {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        
+        .flag-inner {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 33%, #d21034 33%, #d21034 66%, #006233 66%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flag-inner::after {
+            content: "✓";
+            color: #d21034;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        nav {
+            background-color: #004d26;
+            padding: 10px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffcc00;
+        }
+        
+        section {
+            padding: 20px;
+            margin: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #006633;
+            border-bottom: 2px solid #00cc66;
+            padding-bottom: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .contact-item {
+            text-align: center;
+            margin: 10px;
+            padding: 15px;
+            background-color: #f0f9f0;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .testimonial {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .client-name {
+            font-weight: bold;
+            color: #006633;
+        }
+        
+        .client-location {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .offers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .offer {
+            background-color: #e6f7e6;
+            border: 1px dashed #00cc66;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        
+        .offer h3 {
+            color: #006633;
+            margin-top: 0;
+        }
+        
+        form {
+            display: grid;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        form input, form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        form button {
+            background-color: #006633;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        form button:hover {
+            background-color: #00cc66;
+        }
+        
+        .admin-panel {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        footer {
+            background-color: #004d26;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-links {
+            margin: 15px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
+        .form-result {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- ... محتوى HTML تبقى كما هي ... -->
+    <!-- الرأس والعلم الجزائري -->
+    <header>
+        <div class="logo-container">
+            <div class="algeria-flag">
+                <div class="flag-inner"></div>
+            </div>
+            <h1>Badro Peintre</h1>
+        </div>
+        <div class="contact-header">
+            <p>اتصل بنا: 0796053879</p>
+        </div>
+    </header>
+    
+    <!-- شريط التنقل -->
+    <nav>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#services">خدماتنا</a></li>
+            <li><a href="#gallery">معرض الأعمال</a></li>
+            <li><a href="#testimonials">آراء العملاء</a></li>
+            <li><a href="#offers">العروض</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </nav>
+    
+    <!-- قسم الرئيسية -->
+    <section id="home">
+        <h2>مرحباً بكم في Badro Peintre</h2>
+        <p>نقدم لكم أفضل خدمات الدهان والطلاء بجودة عالية وأسعار مناسبة. خبرة واسعة في مجال الدهان الداخلي والخارجي مع استخدام أحدث التقنيات والمواد.</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>هاتف</h3>
+                <p>0796053879</p>
+            </div>
+            <div class="contact-item">
+                <h3>واتساب / فايبر</h3>
+                <p>+213796053879</p>
+            </div>
+            <div class="contact-item">
+                <h3>البريد الإلكتروني</h3>
+                <p>bedro.peintre@gmail.com</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم آراء العملاء -->
+    <section id="testimonials">
+        <h2>آراء عملائنا</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p class="client-name">علي السعيدي</p>
+                <p class="client-location">بوفاريك</p>
+                <p>خويا بدرو الله يحفظك سلكتني قبل عرسي خدمة الله يبارك خويا</p>
+            </div>
+            <div class="testimonial">
+                <p class="client-name">احلام احلام</p>
+                <p class="client-location">سيدي عبد الله</p>
+                <p>شكرا اخي يعطيك صحيحتك خدمتك متقونة وراك ساعدتنا مليح ربي يجازيك خير الجزاء.</p>
+            </div>
+            <div class="testimonial">
+                <p class="client-name">kamel boraoui</p>
+                <p class="client-location">baba ahcen</p>
+                <p>badro frr mrc bqp bon travail et bon chance kho.</p>
+            </div>
+            <div class="testimonial">
+                <p class="client-name">anianoitta</p>
+                <p class="client-location">blida</p>
+                <p>bravo badro top de top toujour fooor.</p>
+            </div>
+            <div class="testimonial">
+                <p class="client-name">عيسى الجزائري</p>
+                <p class="client-location">عمروصة</p>
+                <p>روح راك رابح بدرو خويا خدمة ربي يبارك راصوفيتلي الحيوط مالبلاطر هذا والله كنت رايح لخسارة كبيرة ربي بعثك ليا الله يسترك.</p>
+            </div>
+            <div class="testimonial">
+                <p class="client-name">أمي جنتي</p>
+                <p class="client-location">اولاد يعيش</p>
+                <p>شكرا خويا تستهل الدعم خدمة ما شاء الله كيما تقول العمل والاتقان</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم معرض الصور -->
+    <section id="gallery">
+        <h2>معرض أعمالنا</h2>
+        <div class="gallery">
+            <img src="https://via.placeholder.com/300x200/006633/ffffff?text=عمل+الدهان" alt="عمل الدهان">
+            <img src="https://via.placeholder.com/300x200/00cc66/ffffff?text=طلاء+جديد" alt="طلاء جديد">
+            <img src="https://via.placeholder.com/300x200/004d26/ffffff?text=تشطيبات" alt="تشطيبات">
+            <img src="https://via.placeholder.com/300x200/ffcc00/000000?text=ألوان+متنوعة" alt="ألوان متنوعة">
+            <img src="https://via.placeholder.com/300x200/ffffff/006633?text=ديكورات" alt="ديكورات">
+            <img src="https://via.placeholder.com/300x200/cccccc/006633?text=أعمالنا" alt="أعمالنا">
+        </div>
+    </section>
+    
+    <!-- قسم العروض -->
+    <section id="offers">
+        <h2>العروض الحالية</h2>
+        <div class="offers">
+            <div class="offer">
+                <h3>عرض الدهان الداخلي</h3>
+                <p>خصم 20% على خدمات الدهان الداخلي للمساحات الكبيرة</p>
+            </div>
+            <div class="offer">
+                <h3>عرض الصيف</h3>
+                <p>خصم 15% على الدهان الخارجي خلال فصل الصيف</p>
+            </div>
+            <div class="offer">
+                <h3>عرض خاص للعملاء الجدد</h3>
+                <p>استشارة مجانية وتقدير مجاني للتكلفة</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم الاتصال -->
+    <section id="contact">
+        <h2>اتصل بنا</h2>
+        <form id="contact-form" action="https://formsubmit.co/bedro.peintre@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="رسالة جديدة من الموقع">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="name" placeholder="اسمك الكامل" required>
+            <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+            <input type="tel" name="phone" placeholder="هاتفك">
+            <textarea name="message" placeholder="رسالتك" rows="5" required></textarea>
+            <button type="submit">إرسال الرسالة</button>
+        </form>
+        <div id="form-result" class="form-result"></div>
+    </section>
+    
+    <!-- لوحة التحكم للمسؤول (مخفية بشكل افتراضي) -->
+    <section class="admin-panel" id="admin-panel" style="display: none;">
+        <h2>لوحة التحكم</h2>
+        <div>
+            <h3>إدارة المحتوى</h3>
+            <button onclick="alert('هنا يمكنك إضافة أو تعديل أو حذف تعليقات العملاء')">إدارة آراء العملاء</button>
+            <button onclick="alert('هنا يمكنك إضافة أو تعديل أو حذف صور المعرض')">إدارة المعرض</button>
+            <button onclick="alert('هنا يمكنك إضافة أو تعديل أو حذف العروض')">إدارة العروض</button>
+        </div>
+    </section>
+    
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p>Badro Peintre &copy; 2023 - جميع الحقوق محفوظة</p>
+        <div class="social-links">
+            <a href="#">فيسبوك</a> | 
+            <a href="#">إنستغرام</a> | 
+            <a href="#">يوتيوب</a>
+        </div>
+        <p>تصميم وتطوير باستخدام التقنيات الحديثة</p>
+    </footer>
 
     <script>
-        // بديل localStorage للعمل في جميع البيئات
-        const storage = {
-            setItem: (key, value) => {
-                try {
-                    localStorage.setItem(key, value);
-                } catch (e) {
-                    // إذا فشل localStorage، استخدم cookies كبديل
-                    document.cookie = `${key}=${encodeURIComponent(value)}; max-age=31536000; path=/`;
-                }
-            },
-            getItem: (key) => {
-                try {
-                    return localStorage.getItem(key);
-                } catch (e) {
-                    // إذا فشل localStorage، استخدم cookies كبديل
-                    const name = key + "=";
-                    const decodedCookie = decodeURIComponent(document.cookie);
-                    const ca = decodedCookie.split(';');
-                    for(let i = 0; i < ca.length; i++) {
-                        let c = ca[i];
-                        while (c.charAt(0) === ' ') {
-                            c = c.substring(1);
-                        }
-                        if (c.indexOf(name) === 0) {
-                            return c.substring(name.length, c.length);
-                        }
-                    }
-                    return null;
-                }
-            },
-            removeItem: (key) => {
-                try {
-                    localStorage.removeItem(key);
-                } catch (e) {
-                    // إذا فشل localStorage، استخدم cookies كبديل
-                    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-                }
-            }
-        };
-
-        // بيانات التعليقات
-        const testimonials = JSON.parse(storage.getItem('testimonials')) || [
-            {name: "علي السعيدي", location: "بوفاريك", comment: "خويا بدرو الله يحفظك سلكتني قبل عرسي خدمة الله يبارك خويا"},
-            {name: "احلام احلام", location: "سيدي عبد الله", comment: "شكرا اخي يعطيك صحيحتك خدمتك متقونة وراك ساعدتنا مليح ربي يجازيك خير الجزاء."},
-            {name: "kamel boraoui", location: "baba ahcen", comment: "badro frr mrc bqp bon travail et bon chance kho."},
-            {name: "anianoitta", location: "blida", comment: "bravo badro top de top toujour fooor."},
-            {name: "عيسى الجزائري", location: "عمروصة", comment: "روح راك رابح بدرو خويا خدمة ربي يبارك راصوفيتلي الحيوط مالبلاطر هذا والله كنت رايح لخسارة كبيرة ربي بعثك ليا الله يسترك."},
-            {name: "أمي جنتي", location: "اولاد يعيش", comment: "شكرا خويا تستهل الدعم خدمة ما شاء الله كيما تقول العمل والاتقان"}
-        ];
-
-        // بيانات الصور (يمكن استبدالها بصور حقيقية)
-        const galleryImages = [
-            "https://via.placeholder.com/300x200/006633/ffffff?text=عمل+الدهان",
-            "https://via.placeholder.com/300x200/00cc66/ffffff?text=طلاء+جديد",
-            "https://via.placeholder.com/300x200/004d26/ffffff?text=تشطيبات",
-            "https://via.placeholder.com/300x200/ffcc00/000000?text=ألوان+متنوعة",
-            "https://via.placeholder.com/300x200/ffffff/006633?text=ديكورات",
-            "https://via.placeholder.com/300x200/cccccc/006633?text=أعمالنا"
-        ];
-
-        // بيانات العروض
-        const offers = [
-            {title: "عرض الدهان الداخلي", description: "خصم 20% على خدمات الدهان الداخلي للمساحات الكبيرة"},
-            {title: "عرض الصيف", description: "خصم 15% على الدهان الخارجي خلال فصل الصيف"},
-            {title: "عرض خاص للعملاء الجدد", description: "استشارة مجانية وتقدير مجاني للتكلفة"}
-        ];
-
-        // دالة لعرض التعليقات
-        function displayTestimonials() {
-            const container = document.querySelector('.testimonials');
-            container.innerHTML = '';
+        // معالجة إرسال نموذج الاتصال
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            // إظهار رسالة النجاح
+            const resultDiv = document.getElementById('form-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'form-result success';
+            resultDiv.innerHTML = 'شكراً على رسالتك! سنتواصل معك قريباً.';
             
-            testimonials.forEach(testimonial => {
-                const div = document.createElement('div');
-                div.className = 'testimonial';
-                div.innerHTML = `
-                    <p class="client-name">${testimonial.name}</p>
-                    <p class="client-location">${testimonial.location}</p>
-                    <p>${testimonial.comment}</p>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // دالة لعرض الصور
-        function displayGallery() {
-            const container = document.querySelector('.gallery');
-            container.innerHTML = '';
-            
-            galleryImages.forEach(image => {
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = "صورة من أعمالنا";
-                container.appendChild(img);
-            });
-        }
-
-        // دالة لعرض العروض
-        function displayOffers() {
-            const container = document.querySelector('.offers');
-            container.innerHTML = '';
-            
-            offers.forEach(offer => {
-                const div = document.createElement('div');
-                div.className = 'offer';
-                div.innerHTML = `
-                    <h3>${offer.title}</h3>
-                    <p>${offer.description}</p>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // دالة لإدارة التعليقات (للمسؤول)
-        function manageTestimonials() {
-            alert("هنا يمكنك إضافة أو تعديل أو حذف تعليقات العملاء");
-        }
-
-        // دالة لإدارة المعرض (للمسؤول)
-        function manageGallery() {
-            alert("هنا يمكنك إضافة أو تعديل أو حذف صور المعرض");
-        }
-
-        // دالة لإدارة العروض (للمسؤول)
-        function manageOffers() {
-            alert("هنا يمكنك إضافة أو تعديل أو حذف العروض");
-        }
+            // إخفاء الرسالة بعد 5 ثوان
+            setTimeout(() => {
+                resultDiv.style.display = 'none';
+            }, 5000);
+        });
 
         // دالة لإظهار لوحة التحكم عند الضغط على زر معين (لأغراض التطوير)
         function showAdminPanel() {
@@ -160,55 +450,8 @@
             }
         }
 
-        // معالجة إرسال نموذج الاتصال
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // جمع بيانات النموذج
-            const contactData = {
-                id: Date.now(), // استخدام الطوابع الزمنية كمعرف فريد
-                name: document.getElementById('contact-name').value,
-                email: document.getElementById('contact-email').value,
-                phone: document.getElementById('contact-phone').value || 'غير متوفر',
-                message: document.getElementById('contact-message').value,
-                date: new Date().toISOString(),
-                read: false // لتحديد إذا كانت الرسالة مقروءة أم لا
-            };
-            
-            // الحصول على الرسائل الحالية من storage
-            let messages = JSON.parse(storage.getItem('contactMessages')) || [];
-            
-            // إضافة الرسالة الجديدة
-            messages.push(contactData);
-            
-            // حفظ الرسائل في storage
-            storage.setItem('contactMessages', JSON.stringify(messages));
-            
-            // إظهار رسالة النجاح
-            const resultDiv = document.getElementById('form-result');
-            resultDiv.style.display = 'block';
-            resultDiv.className = 'form-result success';
-            resultDiv.innerHTML = 'شكراً على رسالتك! سنتواصل معك قريباً.';
-            
-            // إخفاء الرسالة بعد 5 ثوان
-            setTimeout(() => {
-                resultDiv.style.display = 'none';
-            }, 5000);
-            
-            // إعادة تعيين النموذج
-            this.reset();
-            
-            // للتأكد من حفظ البيانات، يمكنك عرضها في console
-            console.log('تم حفظ الرسالة:', contactData);
-            console.log('جميع الرسائل:', messages);
-        });
-
         // تهيئة الصفحة عند التحميل
         window.onload = function() {
-            displayTestimonials();
-            displayGallery();
-            displayOffers();
-            
             // إضافة رابط سري للوصول إلى لوحة التحكم (لأغراض التطوير)
             const footer = document.querySelector('footer');
             const adminLink = document.createElement('a');
