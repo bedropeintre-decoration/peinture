@@ -124,13 +124,13 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // بيانات الدخول (يمكن تغييرها)
-            const correctUsername = 'badro';
-            const correctPassword = 'b123r';
+            // بيانات الدخول
+            const correctUsername = 'admin';
+            const correctPassword = 'badro123';
             
             if (username === correctUsername && password === correctPassword) {
                 // حفظ حالة تسجيل الدخول
-                localStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('isLoggedIn', 'true');
                 // الانتقال إلى لوحة التحكم
                 window.location.href = 'dashboard.html';
             } else {
