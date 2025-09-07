@@ -475,6 +475,34 @@
             adminLink.textContent = 'لوحة التحكم';
             footer.appendChild(adminLink);
         };
+        <script>
+    // معالجة إرسال نموذج الاتصال
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // جمع بيانات النموذج
+        const contactData = {
+            id: Date.now(), // استخدام الطوابع الزمنية كمعرف فريد
+            name: document.getElementById('contact-name').value,
+            email: document.getElementById('contact-email').value,
+            phone: document.getElementById('contact-phone').value,
+            message: document.getElementById('contact-message').value,
+            date: new Date().toISOString(),
+            read: false // لتحديد إذا كانت الرسالة مقروءة أم لا
+        };
+        
+        // الحصول على الرسائل الحالية من localStorage
+        let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+        
+        // إضافة الرسالة الجديدة
+        messages.push(contactData);
+        
+        // حفظ الرسائل في localStorage
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+        
+        alert('شكراً على رسالتك! سنتواصل معك قريباً.');
+        this.reset();
+    });
     </script>
 </body>
 </html>
